@@ -15,9 +15,8 @@ class UserRole(RoleEnum):
 
 class User(db.Model, UserMixin):
     id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(50), nullable=False)
-    active = Column(Boolean, default=True)
-    username = Column(String(50), nullable=False)
+    email = Column(String(100),nullable=False)
+    username = Column(String(100), nullable=False)
     password = Column(String(200), nullable=False)
     user_role = Column(Enum(UserRole), default=UserRole.KHACH_HANG)
 
@@ -32,7 +31,7 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
 
-        admin = User(name="admin", username="admin", user_role=UserRole.QUAN_LY)
+        admin = User(username="admin", email="admin@admin.com", user_role=UserRole.QUAN_LY)
         admin.set_password("123456")
 
         db.session.add(admin)
