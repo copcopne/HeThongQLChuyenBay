@@ -75,20 +75,32 @@
 <div class="container-xl px-4 mt-4">
     <!-- Account page navigation-->
     <nav class="nav nav-borders">
-        <a id="profile" class="nav-link active ms-0" href="#" onclick="loadContent('{{url_for('change_profile_view')}}')" target="__blank">Thông tin cá nhân</a>
-        {% if current_user.user_role == 'UserRole.KHACH_HANG' %}
+        <a id="profile" class="nav-link active ms-0" href="#" onclick="loadContent('{{url_for('update_profile')}}')"
+           target="__blank">Thông tin cá nhân</a>
+        {% if current_user.user_role == UserRole.KHACH_HANG %}
         <a id="payment" class="nav-link" href="#" target="__blank">Thông tin thanh toán</a>
         {% endif %}
         <a id="password" class="nav-link" href="#"
-           onclick="loadContent('{{url_for('change_password_view')}}')" target="__blank">Mật khẩu</a>
+           onclick="loadContent('{{url_for('update_password')}}')" target="__blank">Mật khẩu</a>
     </nav>
     <hr class="mt-0 mb-4">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul class="flashes">
+        {% for message, category in messages %}
+        <li class="alert alert-{{ category }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
     <div id="content">
     </div>
+
 </div>
 <script>
     function loadContent(url) {
     const contentDiv = document.getElementById('content');
+    contentDiv.innerHTML = "<p>Loading...</p>";
     fetch(url)
         .then(response => {
             if (!response.ok) {
@@ -106,11 +118,14 @@
         const payment = document.getElementById('payment');
         const password = document.getElementById('password');
 
-        profile.addEventListener(onclick, function(){
+        profile.addEventListener(onclick, loadContent);
 
-        });
-        payment.addEventListener(onclick, loadContent);
+        if (payment !== null)
+            payment.addEventListener(onclick, loadContent);
+
         password.addEventListener(onclick, loadContent);
+
+        profile.click();
 
     });
 </script>

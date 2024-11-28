@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-xl-4">
+        <!-- Profile picture card-->
+        <div class="card mb-4 mb-xl-0">
+            <div class="card-header">Hình đại diện</div>
+            <div class="card-body text-center">
+                <!-- Profile picture image-->
+                <img class="img-account-profile rounded-circle mb-2"
+                     src="{{current_user.profile_picture}}" alt="Ảnh đại diện">
+                <!-- Profile picture help block-->
+                <div class="small font-italic text-muted mb-4">Định dạng .jpg hoặc .png không vượt quá 5MB</div>
+                <!-- Profile picture upload button-->
+                <form action="{{ url_for('upload_profile_picture') }}" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="profile_picture" class="form-control mb-2" accept=".jpg,.png" required>
+                    <button class="btn btn-primary" type="submit">Tải ảnh lên</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-8">
+        <!-- Account details card-->
+        <div class="card mb-4">
+            <div class="card-header">Thông tin chi tiết</div>
+            <div class="card-body">
+                <form method="POST" action="{{url_for('update_profile')}}">
+                    <!-- Form Group (username)-->
+                    <div class="mb-3">
+                        <label class="small mb-1" for="inputUsername">Tên người dùng</label>
+                        <input class="form-control" id="inputUsername" name="inputUsername" type="text"
+                               placeholder="Nhập tên người dùng" value="{{current_user.username}}">
+                    </div>
+                    <!-- Form Row-->
+                    <div class="row gx-3 mb-3">
+                        <!-- Form Group (first name)-->
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="inputLastName">Họ</label>
+                            <input class="form-control" id="inputLastName" name="inputLastName" type="text"
+                                   placeholder="Nhập họ của bạn" value="Valerie">
+                        </div>
+                        <!-- Form Group (last name)-->
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="inputFirstName">Tên</label>
+                            <input class="form-control" id="inputFirstName" name="inputFirstName" type="text"
+                                   placeholder="Nhập tên của bạn" value="Luna">
+                        </div>
+                    </div>
+                    <!-- Form Group (email address)-->
+                    <div class="mb-3">
+                        <label class="small mb-1" for="inputEmailAddress">Địa chỉ email</label>
+                        <input class="form-control" id="inputEmailAddress" name="inputEmailAddress" type="email"
+                               placeholder="Nhập địa chỉ email của bạn" value="{{current_user.email}}">
+                    </div>
+                    <!-- Save changes button-->
+                    <button class="btn btn-primary" type="sumbit">Lưu thay đổi</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

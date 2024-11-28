@@ -1,5 +1,6 @@
 from urllib.parse import quote
 
+import cloudinary
 from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
@@ -12,3 +13,8 @@ app.secret_key = "DSJKHFSDLKFSDfSIXNDFSAHJF@#243294@!"
 db = SQLAlchemy(app)
 login = LoginManager(app)
 login_manager = LoginManager()
+
+cloudinary.config(
+    cloud_name="dq3dtj8lz",
+    api_key="582527119715667",
+    api_secret="zWDS8SbqF_hr_aDUMyS0PKiyWK8")

@@ -1,12 +1,12 @@
-{% extends 'layout/base.html' %}
+{% extends 'admin/master.html' %}
 
-{% block title%}
-<title>Đăng nhập</title>
-{% endblock %}
+{% block body %}
+{% if current_user.is_authenticated %}
 
-{% block content %}
-<!-- Section: Design Block -->
+<h1 class="text-info text-center mt-1">WELCOME, {{current_user.username}}</h1>
+{% else %}
 <section class="text-center">
+
     <!-- Background image -->
     <div class="p-5 bg-image" style="
         background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
@@ -24,7 +24,7 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-8">
 
-                    <h2 class="fw-bold mb-5">Đăng nhập</h2>
+                    <h2 class="fw-bold mb-5">Đăng nhập trang quản trị</h2>
 
                     {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}
@@ -36,7 +36,7 @@
                     {% endif %}
                     {% endwith %}
 
-                    <form method="POST" action="{{ url_for('login') }}" autocomplete="on">
+                    <form method="POST" action="{{ url_for('login_as_admin') }}" autocomplete="on">
 
                         <!-- Username input -->
                         <div data-mdb-input-init class="form-outline mb-4">
@@ -73,5 +73,6 @@
         </div>
     </div>
 </section>
-<!-- Section: Design Block -->
+{% endif %}
+
 {% endblock %}

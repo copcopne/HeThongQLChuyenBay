@@ -1,8 +1,7 @@
-<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
-    <!-- Container wrapper -->
+
     <div class="container">
-        <!-- Navbar brand -->
+
         <a class="navbar-brand me-2" href={{url_for('index')}}>
             <img
                     src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
@@ -13,7 +12,6 @@
             />
         </a>
 
-        <!-- Toggle button -->
         <button
                 data-mdb-collapse-init
                 class="navbar-toggler"
@@ -25,29 +23,21 @@
         >
             <i class="fas fa-bars"></i>
         </button>
-        <!-- Collapsible wrapper -->
+
         <div class="collapse navbar-collapse" id="navbarButtonsExample">
-            <!-- Left links -->
+
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
                 <li class="nav-item">
                     <a class="nav-link" href={{url_for('index')}}>Trang chủ</a>
                 </li>
+
             </ul>
-            <form class="d-flex input-group w-auto">
-                <input
-                        type="search"
-                        class="form-control rounded"
-                        placeholder="Tìm chuyến bay..."
-                        aria-label="Search"
-                        aria-describedby="search-addon"
-                />
-                <span class="input-group-text border-0" id="search-addon">
-        <i class="fas fa-search"></i>
-                </span>
-            </form>
-            <!-- Left links -->
+
             {% if current_user.is_authenticated %}
-            <div class="nav-item dropdown">
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                div class="nav-item dropdown">
+
                 <a
                         data-mdb-dropdown-init
                         class="nav-link dropdown-toggle d-flex align-items-center"
@@ -57,41 +47,43 @@
                         aria-expanded="false"
                 >
                     <img
-                            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp"
+                            src="{{current_user.profile_picture}}"
                             class="rounded-circle"
                             height="30"
                             alt="User Profile Picture"
                             loading="lazy"
                     />
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    {% if current_user.user_role != 'UserRole.KHACH_HANG' %}
-                    <li>
-                        <a class="dropdown-item" href="{{ url_for('redirect_user') }}">Trang dành cho bạn</a>
-                    </li>
-                    {% endif %}
-                    <li>
-                        <a class="dropdown-item" href="{{url_for('update_account_view')}}">Thiết lập thông tin tài khoản</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="{{ url_for('logout') }}">Đăng xuất</a>
-                    </li>
-                </ul>
-            </div>
-            {% else %}
-            <div class="d-flex align-items-center">
-                <a href="{{ url_for('login') }}" class="btn btn-link px-3 me-2">
-                    Đăng nhập
-                </a>
-                <a href="{{ url_for('register') }}" class="btn btn-primary me-3">
-                    Đăng ký
-                </a>
-            </div>
-            {% endif %}
+                {% if current_user.user_role != UserRole.KHACH_HANG %}
+
+                <li>
+                    <a class="dropdown-item" href="{{ url_for('redirect_user') }}">Trang dành cho bạn</a>
+                </li>
+
+                {% endif %}
+
+                <li>
+                    <a class="dropdown-item" href="{{url_for('update_account_view')}}">Thiết lập thông tin tài khoản</a>
+                </li>
+
+                <li>
+                    <a class="dropdown-item" href="{{ url_for('logout') }}">Đăng xuất</a>
+                </li>
+
+            </ul>
 
         </div>
-        <!-- Collapsible wrapper -->
+        {% else %}
+
+        <div class="d-flex align-items-center">
+            <a href="{{ url_for('login') }}" class="btn btn-link px-3 me-2">
+                Đăng nhập
+            </a>
+            <a href="{{ url_for('register') }}" class="btn btn-primary me-3">
+                Đăng ký
+            </a>
+        </div>
+        {% endif %}
+
     </div>
-    <!-- Container wrapper -->
 </nav>
-<!-- Navbar -->
