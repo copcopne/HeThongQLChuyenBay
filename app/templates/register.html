@@ -66,8 +66,8 @@
                                 <input id="username" name="username" class="form-control"
                                        required autocomplete="off"/>
                                 <label class="form-label" for="username">Tên người dùng</label>
-                                <div class="m-2 animate__animated animate__fadeIn" id="feedback"></div>
                             </div>
+                            <div id="feedback"></div>
 
                             <!-- Password input -->
                             <div data-mdb-input-init class="form-outline mb-4">
@@ -105,8 +105,12 @@
         </div>
     </section>
 </div>
-<script type="text-javascript" src = "{{ url_for('static', filename='js/check_username_availability.js') }}">
+{%block script%}
+<script type="text/javascript"
+        src = "{{ url_for('static', filename='js/check_username_availability.js') }}">
 </script>
-<script type="text-javascript" src = "{{ url_for('static', filename='js/check_passwords_match.js') }}">
+<script type="text/javascript"
+        src = "{{ url_for('static', filename='js/check_passwords_match.js') }}">
 </script>
+{% endblock %}
 {% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+
+<title>Cập nhật thông tin tài khoản</title>
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/profile.css')}}">
+{% endblock %}
+{% block content %}
+
+<h1>UPDATE</h1>
+
+<div class="container-xl px-4 mt-4">
+    <!-- Account page navigation-->
+    <nav class="nav nav-borders">
+        <a id="profile" class="nav-link ms-0 {% if request.endpoint == 'update_account_view' or request.endpoint == 'update_profile' %}active{% endif %}" href="{{ url_for('update_profile') }}" target="__blank">Thông tin cá nhân</a>
+        <a id="password" class="nav-link {% if request.endpoint == 'update_password' %}active{% endif %}" href="{{ url_for('update_password') }}" target="__blank">Mật khẩu</a>
+    </nav>
+    <hr class="mt-0 mb-4">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+    {% block section required%}
+    {% endblock %}
+</div>
+{% endblock %}

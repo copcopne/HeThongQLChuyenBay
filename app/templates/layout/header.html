@@ -35,8 +35,7 @@
             </ul>
 
             {% if current_user.is_authenticated %}
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                div class="nav-item dropdown">
+            <div class="nav-item dropdown">
 
                 <a
                         data-mdb-dropdown-init
@@ -54,36 +53,38 @@
                             loading="lazy"
                     />
                 </a>
-                {% if current_user.user_role != UserRole.KHACH_HANG %}
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    {% if current_user.user_role != UserRole.KHACH_HANG %}
+                    
+                    <li>
+                        <a class="dropdown-item" href="{{ url_for('redirect_user') }}">Trang dành cho bạn</a>
+                    </li>
 
-                <li>
-                    <a class="dropdown-item" href="{{ url_for('redirect_user') }}">Trang dành cho bạn</a>
-                </li>
+                    {% endif %}
 
-                {% endif %}
+                    <li>
+                        <a class="dropdown-item" href="{{url_for('update_account_view')}}">Thiết lập thông tin tài
+                            khoản</a>
+                    </li>
 
-                <li>
-                    <a class="dropdown-item" href="{{url_for('update_account_view')}}">Thiết lập thông tin tài khoản</a>
-                </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ url_for('logout') }}">Đăng xuất</a>
+                    </li>
 
-                <li>
-                    <a class="dropdown-item" href="{{ url_for('logout') }}">Đăng xuất</a>
-                </li>
+                </ul>
 
-            </ul>
+            </div>
+            {% else %}
+
+            <div class="d-flex align-items-center">
+                <a href="{{ url_for('login') }}" class="btn btn-link px-3 me-2">
+                    Đăng nhập
+                </a>
+                <a href="{{ url_for('register') }}" class="btn btn-primary me-3">
+                    Đăng ký
+                </a>
+            </div>
+            {% endif %}
 
         </div>
-        {% else %}
-
-        <div class="d-flex align-items-center">
-            <a href="{{ url_for('login') }}" class="btn btn-link px-3 me-2">
-                Đăng nhập
-            </a>
-            <a href="{{ url_for('register') }}" class="btn btn-primary me-3">
-                Đăng ký
-            </a>
-        </div>
-        {% endif %}
-
-    </div>
 </nav>

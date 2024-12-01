@@ -47,7 +47,7 @@ def login():
             login_user(user=user, remember=remember)
             return redirect("/")
 
-        flash("Sai tên đăng nhập hoặc mật khẩu!", "danger")
+        flash(message="Sai tên đăng nhập hoặc mật khẩu!",category="danger")
         return redirect("/login")
 
     if current_user.is_authenticated:
@@ -108,16 +108,16 @@ def register():
 @app.route("/profile", methods=["POST", "GET"])
 @login_required
 def update_account_view():
-    return render_template("profile.html")
+    return render_template("update-info.html")
 
 
 @app.route("/profile/change_basic_info", methods=["POST", "GET"])
 def update_profile():
     if request.method == "POST":
-        username = request.form.get("inputUsername")
-        first_name = request.form.get("inputFirstName")
-        last_name = request.form.get("inputLastName")
-        email = request.form.get("inputEmailAddress")
+        username = request.form.get("username")
+        first_name = request.form.get("firstName")
+        last_name = request.form.get("lastName")
+        email = request.form.get("emailAddress")
 
         msg = UserDAO.update_profile(user=current_user, first_name=first_name,
                                      last_name=last_name, username=username, email=email)
@@ -144,13 +144,13 @@ def upload_profile_picture():
 def update_password():
     if request.method == "POST":
 
-        old = request.form.get("oldPassword")
+        old = request.form.get("old_password")
 
         if UserDAO.auth_user(username=current_user.username, password=old):
             msg = ""
-            new = request.form.get("newPassword")
+            new = request.form.get("password")
             print(new)
-            if new.__eq__(request.form.get("confirmPassword")):
+            if new.__eq__(request.form.get("confirm_password")):
                 msg = UserDAO.update_profile(user=current_user, password=new)
 
             flash(message=msg, category=utils.get_flash_category(msg))

@@ -1,3 +1,5 @@
+{% extends 'layout/update-profile.html' %}
+{% block section%}
 <div class="row">
     <div class="col-xl-4">
         <!-- Profile picture card-->
@@ -25,35 +27,43 @@
                 <form method="POST" action="{{url_for('update_profile')}}">
                     <!-- Form Group (username)-->
                     <div class="mb-3">
-                        <label class="small mb-1" for="inputUsername">Tên người dùng</label>
-                        <input class="form-control" id="inputUsername" name="inputUsername" type="text"
-                               placeholder="Nhập tên người dùng" value="{{current_user.username}}">
+                        <label class="small mb-1" for="username">Tên người dùng</label>
+                        <input class="form-control" id="username" name="username" type="text"
+                               placeholder="Nhập tên người dùng" value="{{current_user.username}}" autocomplete="off">
+                        <div id="feedback" class="mt-2"></div>
                     </div>
                     <!-- Form Row-->
                     <div class="row gx-3 mb-3">
                         <!-- Form Group (first name)-->
                         <div class="col-md-6">
-                            <label class="small mb-1" for="inputLastName">Họ</label>
-                            <input class="form-control" id="inputLastName" name="inputLastName" type="text"
+                            <label class="small mb-1" for="lastName">Họ</label>
+                            <input class="form-control" id="lastName" name="lastName" type="text"
                                    placeholder="Nhập họ của bạn" value="Valerie">
                         </div>
                         <!-- Form Group (last name)-->
                         <div class="col-md-6">
-                            <label class="small mb-1" for="inputFirstName">Tên</label>
-                            <input class="form-control" id="inputFirstName" name="inputFirstName" type="text"
+                            <label class="small mb-1" for="firstName">Tên</label>
+                            <input class="form-control" id="firstName" name="firstName" type="text"
                                    placeholder="Nhập tên của bạn" value="Luna">
                         </div>
                     </div>
                     <!-- Form Group (email address)-->
                     <div class="mb-3">
-                        <label class="small mb-1" for="inputEmailAddress">Địa chỉ email</label>
-                        <input class="form-control" id="inputEmailAddress" name="inputEmailAddress" type="email"
-                               placeholder="Nhập địa chỉ email của bạn" value="{{current_user.email}}">
+                        <label class="small mb-1" for="emailAddress">Địa chỉ email</label>
+                        <input class="form-control" id="emailAddress" name="emailAddress" type="email"
+                               placeholder="Nhập địa chỉ email của bạn" value="{{current_user.email}}" autocomplete="off">
                     </div>
                     <!-- Save changes button-->
-                    <button class="btn btn-primary" type="sumbit">Lưu thay đổi</button>
+                    <button class="btn btn-primary" type="submit" id="submit-btn">Lưu thay đổi</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+{% endblock %}
+{% block script %}
+<script type="text/javascript"
+        src="{{ url_for('static', filename='js/check_username_availability.js') }}">
+</script>
+{% endblock %}
