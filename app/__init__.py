@@ -15,6 +15,6 @@ login = LoginManager(app)
 login_manager = LoginManager()
 
 cloudinary.config(
-    cloud_name="dq3dtj8lz",
-    api_key="582527119715667",
-    api_secret="zWDS8SbqF_hr_aDUMyS0PKiyWK8")
+    cloud_name="",
+    api_key="",
+    api_secret="")
